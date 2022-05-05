@@ -1,0 +1,220 @@
+    1  /cita/local/bin/passwd
+    2  ls
+    3  cd ..
+    4  ls
+    5  cd horlaville
+    6  ls
+    7  vncserver
+    8  cd /fs/lustre/scratch/horlaville/
+    9  ls
+   10  touch test.dat
+   11  ls
+   12  ls
+   13  cd /fs/lustre/scratch/horlaville/
+   14  ls
+   15  df
+   16  exit
+   17  xeyes
+   18  xev
+   19   xev
+   20  xev
+   21  exit
+   22  xeyes
+   23  xev
+   24  ssh -YC lobster
+   25  exit
+   26  ssh -YC lobster
+   27  xev
+   28  ssh -YC lobster
+   29  ssh -YC lobster
+   30  xeyes
+   31  python
+   32  module load python
+   33  python
+   34  gedit
+   35  ls
+   36  vncserver
+   37  scp /Users/patrickhorlaville/Downloads/Li+2016.pdf horlaville@gw.cita.utoronto.ca:/Downloads
+   38  w
+   39  who
+   40  whoami
+   41  pwd
+   42  ls
+   43  cd ~fhorrobin/
+   44  ls
+   45  cd 
+   46  ls
+   47  ls -la
+   48  cd Documents
+   49  ls -la
+   50  more Papers
+   51  cd Papers
+   52  ls -la
+   53  more Behroozi+2018.pdf
+   54  ls
+   55  pwd
+   56  open Stein+2018.pdf
+   57  cd ~murray
+   58  ls
+   59  cd Papers
+   60  ls
+   61  cd Hopkins/All_feedback
+   62  cd Hopkins/All_Feedback
+   63  cd second_draft
+   64  ls
+   65  cd ~
+   66  ls
+   67  evince sfh_vs_fbmodel.pdf
+   68  cd ~murray
+   69  cd Papers/Hopkins/Full_Feedback
+   70  cd Papers
+   71  cd Hopkins
+   72  cd All_Feedback
+   73  cd second_draft
+   74  evince sfh_vs_fbmodel.pdf
+   75  cd ~
+   76  ls
+   77  cd Documents/Papers
+   78  evince Stein+2018.pdf
+   79  history
+   80  grep ms*
+   81  ls
+   82  cd ..
+   83  ls
+   84  m test.txt
+   85  make test.txt
+   86  ls
+   87  mk test.txt
+   88  touch test.txt
+   89  ls
+   90  evince test.txt
+   91  vi test.txt
+   92  cd ..
+   93  ls
+   94  cd Documents
+   95  mkdir CTA200_2022
+   96  cd CTA200_202
+   97  cd CTA200_2022
+   98  which vi
+   99  vim list_dir
+  100  vim list dir
+  101  ls
+  102  pwd
+  103  ls
+  104  ls -a
+  105  ls -la
+  106  cd .
+  107  ls
+  108  ls -a
+  109  ls -la
+  110  cd .
+  111  ls -la
+  112  pwd
+  113  vim list_dir
+  114  m list_dir
+  115  ls -la
+  116  pwd
+  117  cd ..
+  118  ls
+  119  pwd
+  120  rm test.txt
+  121  ls
+  122  cd ..
+  123  ls
+  124  cd /fs/lustre/scratch/horlaville
+  125  ls
+  126  vim test.dat
+  127  cd 
+  128  ls
+  129  ls -la
+  130  find . -name "list" print
+  131  find . -name "list" -print
+  132  find . -name "Stein" -print
+  133  find . -name "*Stein*" -print
+  134  module avail
+  135  module load gcc
+  136  gcc --version
+  137  module load python
+  138  module list
+  139  pwd
+  140  cd ~fhorrobin/
+  141  find . -name "*.c*" -print
+  142  find . -name "*main.c*" -print
+  143  find . -name "main.c" -print
+  144  find . -name main.c -print
+  145  find . main.c -print
+  146  ls
+  147  cd CTA200H
+  148  ls
+  149  cd assignment1_2021
+  150  la
+  151  ls
+  152  m main.c
+  153  vim main.c
+  154  cd ..
+  155  ls
+  156  cd ..
+  157  ls
+  158  ls *.c
+  159  vim test.py
+  160  python test.py
+  161  python main.py
+  162  cd 
+  163  ls
+  164  cd /fs/lustre/scratch/horlaville
+  165  ls
+  166  mkdir CTA200_2022
+  167  cd CTA200_2022
+  168  pwd
+  169  mkdir assignment_1
+  170  touch README.md
+  171  vim README.md
+  172  vi README.md
+  173  ls -la
+  174  cd ~murray
+  175  find . -name "Hello_world.c" -print
+  176  ls
+  177  find -iname Hello_world.c
+  178  cd Papers/tmp
+  179  ls
+  180  cp Hello_world.c
+  181  cp Hello_world.c /fs/lustre/scratch/horlaville/CTA200_2022/assignment_1
+  182  cd /fs/lustre/scratch/horlaville/CTA200_2022/assignment_1
+  183  ls
+  184  mv Hello_world.c Hello_world_horlaville.c
+  185  ls
+  186  cd ~murray
+  187  find . -name "Hello_world.py" -print
+  188  cd ./tmp
+  189  ls
+  190  cp Hello_world.py /fs/lustre/scratch/horlaville/CTA200_2022/assignment_1
+  191  cd /fs/lustre/scratch/horlaville/CTA200_2022/assignment_1/
+  192  ls
+  193  mv Hello_world.py Hello_world_horlaville.py
+  194  ls
+  195  module list
+  196  gcc Hello_world_horlaville.c
+  197  ls
+  198  ./a.out
+  199  vi Hello_world_horlaville.c
+  200  rm a.out
+  201  ls
+  202  gcc Hello_world_horlaville.c
+  203  ls
+  204  ./a.out
+  205  vi Hello_world_horlaville.py
+  206  python Hello_world_horlaville.py
+  207  history
+  208  history > commands.txt
+  209  vi commands.txt
+  210  rm commands.txt 
+  211  history 197
+  212  man history
+  213  ./a.out
+  214  ./a.out > output_c.txt
+  215  ls
+  216  vi output_c.txt
+  217  python Hello_world_horlaville > output_python.txt
+  218  python Hello_world_horlaville.py > output_python.txt
+  219  ls
+  220  history > history.txt

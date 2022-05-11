@@ -1,0 +1,128 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+
+\usepackage{biblatex}
+\addbibresource{lorenz_bib.bib}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
+
+\usepackage{graphicx}
+
+
+\title{CTA200 2022 Assignment 3}
+\author{Patrick Horlaville}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+\section*{Question 1}
+
+To perform the required iteration, I first set up my $x$ and $y$ dimensional axes. To start with, they are set 100 in length, each covering uniformly the interval between -2 and 2, which means that my complex grid encloses 100x100=10,000 points. 
+
+The \texttt{iterate()} function allows to perform the indicated iteration over a user-specified number of iteration steps starting from complex number $z_0$ = 0 and using some complex point $c$ as prescribed by the problem set. If at any step, the value of $\lvert z \rvert$ goes to infinity, the iteration stops and the final value for the norm of $z$ \texttt{norm} is set to be infinity. The number of steps \texttt{nsteps} that was used to reach this point is retrievable along with $\lvert z \rvert$. If the iteration reaches the total number of iteration steps and $\lvert z \rvert$ is not infinity, $\lvert z \rvert$ is retrieved and \texttt{nsteps} is set to \texttt{None} as to indicate that $\lvert z \rvert$ has not diverged. 
+
+The function \texttt{iterate()} can be applied on each point on the grid. It take roughly 1ms to run for one $c$ value for 100 iterations, hence running 10,000 $c$ points (all our grid) over 100 iterations takes about 10 seconds to complete. The resulting \texttt{norm}'s and \texttt{nsteps}'s are stored. The iterated values are sent through the \texttt{booling()} function, which turns any non-infinity entry into \texttt{True} and any infinity entry into \texttt{False}. 
+
+That way, each point on the grid is attributed a \texttt{True} or \texttt{False} value depending on whether or not the corresponding $c$ to this point on the grid has yielded a divergent $\lvert z \rvert$ during the iteration process.
+
+The \texttt{matplotlib.pyplot.contourf} function is then used, along with a binary color map, to represent the distribution of those \texttt{True} and \texttt{False} values on the grid. I have to admit I am not quite satisfied with this method and I wish I had found a truly binary color mapping tool in python. The few searches and lots of tests I have conducted were not conclusive. Nevertheless it accurately depicts what I aimed to plot:
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=8cm]{fig1.png}
+  \caption{Here the complex grid is shown, where the divergent/convergent behavior of each point (when input into \texttt{iterate()}) is shown either in black (for convergent) or in grey (for divergent). }
+\end{figure}
+
+
+\break
+
+
+From the plot, it seems like any complex point on the grid whose imaginary component is below $\approx$ 0.25 does not diverge when being iterated over with \texttt{iterate()}. 
+
+Then, we look into \texttt{nsteps} for the second plot. A color map, still using \texttt{matplotlib.pyplot.contourf}, is used. For each point, we have either a \texttt{None} value or an integer value depending on whether $\lvert z \rvert$ diverged during the iteration or not. From our first plot, it seems like all points below $y \approx 0.25$ are convergent, so we limit our plot to $y \in [0, 2]$ to have a better insight on the features of the part where the points are divergent. This gives us figure 2:
+
+\begin{figure}[h!]
+    \centering
+	\includegraphics[width=8cm]{fig2.png}
+	\caption{Here the complex grid is shown in the imaginary domain only between 0 and 2. Each point in the colored region reaches infinity after a number of steps that is shown. As we can see, it requires less and less steps before reaching infinity as $y$ increases.}
+\end{figure}
+
+My results show that on the grid, complex numbers with an imaginary component approximately inferior to 0.25, when input into the \texttt{iterate()} function as $c$, do not make $\lvert z \rvert$ diverge to infinity. Rather, this divergence behavior happens when $\Im(c) \gtrsim 0.25 $. As $\Im(c)$ increases, the number of steps needed to reach the divergence decreases. This makes sense as greater components for $\Im(c)$ contribute to increase $\lvert z \rvert$ in the iteration, therefore it increases more rapidly towards infinity.
+
+
+
+\section*{Question 2}
+
+First, the equations are set up pretty easily with a defined \texttt{eqns()} function, which deals with 3 ODEs for each of our variable. The values of the parameters and initial conditions are then set with $W_0$ and $srb$. We set a time scale of integration from 0 to 60 divided in 6000 time steps, so as to have a time step of 0.01.
+
+The function \texttt{odeint()} is then used to integrate our system of ODEs with the specified $W_0$, $srb$ values and time domain. 
+
+From the output of \texttt{odeint()}, we can pick out the evolution of our system in each spatial dimension. In order to replicate Figure 1 from Lorenz \cite{lorenz_deterministic_1963}, we first pick out the $Y$ dimension and look at its evolution through the first 3000 time steps, plotting 3 times 1000 steps. We have the following figures:
+
+\begin{figure}[h!]
+    \centering
+	\includegraphics[width=8cm]{fig3.png}
+	\caption{Numerical solution in the Y-dimensional axis between $t$=0 and $t$=10. The behavior of the solution looks strongly similar to that of Lorenz's \cite{lorenz_deterministic_1963}.}
+	\label{fig:fig3}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+	\includegraphics[width=8cm]{fig4.png}
+	\caption{Numerical solution in the Y-dimensional axis between $t$=10 and $t$=20. Again, the behavior of the solution looks strongly similar to that of Lorenz's \cite{lorenz_deterministic_1963}.}
+	\label{fig:fig4}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+	\includegraphics[width=8cm]{fig5.png}
+	\caption{Numerical solution in the Y-dimensional axis between $t$=20 and $t$=30. Again, the behavior of the solution looks strongly similar to that of Lorenz's \cite{lorenz_deterministic_1963}.}
+	\label{fig:fig5}
+\end{figure}
+
+\break
+
+To reproduce Figure 2, we pick out the solution of our equations between time steps 1400 and 1900. We can then plot the $Y$ against the $Z$ solution and the $Y$ against the $X$ solution, which corresponds to the plots of Figure 2 from Lorenz:
+
+\begin{figure}[h!]
+    \centering
+	\includegraphics[width=8cm]{fig6.png}
+	\caption{Numerical solution between steps 1400 and 1900 projected on the X-plane. Once more, the behavior of the solution looks strongly similar to that of Lorenz's \cite{lorenz_deterministic_1963}.}
+	\label{fig:fig6}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+	\includegraphics[width=8cm]{fig7.png}
+	\caption{Numerical solution between steps 1400 and 1900 projected on the Z-plane. Again, the behavior of the solution looks strongly similar to that of Lorenz's \cite{lorenz_deterministic_1963}.}
+	\label{fig:fig7}
+\end{figure}
+
+\break
+
+We can repeat the solving of the ODEs' system with a slightly different set of initial conditions. First, we define that new set $W_0'$ according to the problem set. To compare the two solutions, we analyze dimension by dimension. We take the sum of the squared difference between each $X$, $Y$ and $Z$ component. Take the square root to retrieve the distance between each point of $W_0$ and $W_0'$ at any time $t$. Look at how that distance evolves in time and we get:
+
+\begin{figure}[h!]
+    \centering
+	\includegraphics[width=8cm]{fig8.png}
+	\caption{Evolution of the distance between $W_0$ and $W_0'$ as a function of time, as shown in a semi-log plot. The linearity of the relationship hints towards the exponentially increasing difference with time despite marginally small initial differences between $W_0$ and $W_0'$.}
+	\label{fig:fig8}
+\end{figure}
+
+\break 
+
+Overall I observe a coherent match between my results and those Lorenz's \cite{lorenz_deterministic_1963}. Small perturbations into the initial conditions of the system of equations reigning our system and the solutions quickly differ; they do so exponentially as a matter of fact as seen in Figure \ref{fig:fig8}. The shapes of the different plots shown are also a good visual match (Figures \ref{fig:fig3}, \ref{fig:fig4}, \ref{fig:fig5}, \ref{fig:fig6} and \ref{fig:fig7}). 
+
+\printbibliography
+
+
+
+\end{document}
